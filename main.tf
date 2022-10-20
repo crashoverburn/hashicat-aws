@@ -199,3 +199,16 @@ resource "aws_key_pair" "hashicat" {
   key_name   = local.private_key_filename
   public_key = tls_private_key.hashicat.public_key_openssh
 }
+
+module "s3_bucket" {
+  source = "app.terraform.io/Zurich-Chile/s3-bucket/aws"
+  version = "2.8.0"
+
+  bucket = "my-s3-bucket"
+  acl    = "private"
+
+  versioning = {
+    enabled = true
+  }
+
+}
